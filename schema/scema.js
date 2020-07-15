@@ -2,7 +2,8 @@ const graphql = require('graphql');
 const _ = require('lodash');
 const {
     GraphQLObjectType, 
-    GraphQLString, 
+    GraphQLString,
+    GraphQLID, 
     GraphQLSchema
 } = graphql;
 
@@ -16,7 +17,7 @@ var books = [
 const BookType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({
-        id: {type: GraphQLString},
+        id: {type: GraphQLID},
         name: {type: GraphQLString},
         genre: {type: GraphQLString}
     })
@@ -28,7 +29,7 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         book: {
             type: BookType,
-            args: {id: {type:GraphQLString}},           // argments whever we need to pass need to add here (in args)
+            args: {id: {type:GraphQLID}},           // argments whever we need to pass need to add here (in args)
             resolve(parent, args){
                 //code to get data rom db/other source
                 //parent is used for relactions 
