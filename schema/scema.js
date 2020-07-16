@@ -5,7 +5,8 @@ const {
     GraphQLString,
     GraphQLID, 
     GraphQLSchema,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 } = graphql;
 
 // dummy data
@@ -42,10 +43,17 @@ const BookType = new GraphQLObjectType({
 
 const AuthorType = new GraphQLObjectType({
     name: 'Author',
+    // if the fields property is not in the funation then it will show error when we put the relaction 
     fields: () => ({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
-        age: {type: GraphQLInt}
+        age: {type: GraphQLInt},
+        books: {
+            type: GraphQLList(BookType),
+            resolve(parent, args){
+                return _.filter(books, {authorId:parent.id})
+            }
+        }
     })
 })
 
