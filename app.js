@@ -3,10 +3,14 @@ const express = require('express');
 // const graphqlHTTP = require('express-graphql').graphqlHTTP;
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/scema');
+const cors = require('cors');
 const dbconnection = require('./model');
 
 
 const app = express();
+
+//allow crose
+app.use(cors());
 
 //graphqlHTTP use for finding graphql 
 app.use('/graphql',graphqlHTTP({
